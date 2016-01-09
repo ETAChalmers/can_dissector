@@ -24,7 +24,7 @@ function p_auml.dissector(tvb,pinfo,tree)
     local cmd_tvbr = can_id.tvb:bitfield(3,4)
     subt:add(f_cmd, cmd_tvbr)
 
-    pinfo.cols.protocol = "    "
+    pinfo.cols.protocol = "   "
 
     -- to dissect further, call sub dissector
     auml_cmd_tbl:try(cmd_tvbr, tvb, pinfo, tree)

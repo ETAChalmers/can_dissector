@@ -26,10 +26,10 @@ function p_chn.dissector(tvb,pinfo,root)
     local chn_value = tvb(0,2)
     subt:add(f_chn_value, chn_value)
     
-    pinfo.cols.protocol = "CHN "
-    pinfo.cols.src = string.format("Node: %3d", chn_src)
-    pinfo.cols.dst = string.format("Chn: %5d", chn_id)
-    pinfo.cols.info = string.format("Value: %5d", chn_value:uint())
+    pinfo.cols.protocol = "CHN"
+    pinfo.cols.src = string.format("node %d", chn_src)
+    pinfo.cols.dst = string.format("chn %d", chn_id)
+    pinfo.cols.info = string.format("Value: %d", chn_value:uint())
 end
 
 DissectorTable.get("auml.cmd"):add(0xa,p_chn)
