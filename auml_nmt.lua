@@ -33,7 +33,7 @@ function p_nmt.dissector(tvb,pinfo,root)
     subt:add(f_nmt_src,  nmt_src)
     subt:add(f_nmt_dst,  nmt_dst)
 
-    pinfo.cols.protocol = "NMT"
+    pinfo.cols.protocol = "nmt"
 
     if nmt_src == 0 then
         pinfo.cols.src = ""
@@ -62,4 +62,4 @@ function p_nmt.dissector(tvb,pinfo,root)
     end
 end
 
-DissectorTable.get("auml.cmd"):add(0x0,p_nmt)
+DissectorTable.get("auml.cls"):add(0,p_nmt)

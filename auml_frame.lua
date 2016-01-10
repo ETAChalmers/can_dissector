@@ -1,9 +1,9 @@
 local p_auml = Proto.new("auml", "Auml CAN format")
 
-local f_cmd = ProtoField.uint8("auml.cmd", "Command ID", base.DEC)
+local f_cls = ProtoField.uint8("auml.cls", "Command ID", base.DEC)
 
 p_auml.fields = {
-    f_cmd
+    f_cls
 }
 
 -- Fields to read
@@ -11,7 +11,7 @@ local f_can_id = Field.new("can.id")
 local f_can_xtd = Field.new("can.flags.xtd")
 
 -- For sub dissectors
-local auml_cmd_tbl = DissectorTable.new("auml.cmd", "Auml Command")
+local auml_cls_tbl = DissectorTable.new("auml.cls", "Auml Command")
 
 function p_auml.dissector(tvb,pinfo,tree)
     local can_id = f_can_id()
@@ -21,13 +21,13 @@ function p_auml.dissector(tvb,pinfo,tree)
     if not can_xtd then return end
 
     local subt = tree:add(p_auml,tvb)
-    local cmd_tvbr = can_id.tvb:bitfield(3,4)
-    subt:add(f_cmd, cmd_tvbr)
+    local cls_tvbr = can_id.tvb:bitfield(3,4)
+    subt:add(f_cls, cls_tvbr)
 
     pinfo.cols.protocol = "   "
 
     -- to dissect further, call sub dissector
-    auml_cmd_tbl:try(cmd_tvbr, tvb, pinfo, tree)
+    auml_cls_tbl:try(cls_tvbr, tvb, pinfo, tree)
 end
 
 DissectorTable.get("can.subdissector"):add(0,p_auml)
