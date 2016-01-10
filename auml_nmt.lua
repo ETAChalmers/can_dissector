@@ -30,6 +30,7 @@ function p_nmt.dissector(tvb,pinfo,root)
     local nmt_src  = can_id:bitfield(16, 8)
     local nmt_dst  = can_id:bitfield(24, 8)
 
+    subt:add(f_nmt_type, nmt_type)
     subt:add(f_nmt_src,  nmt_src)
     subt:add(f_nmt_dst,  nmt_dst)
 
